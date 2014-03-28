@@ -1,0 +1,22 @@
+Changes
+LICENSE
+MANIFEST
+Makefile.PL
+README.md
+lib/Eixo/Rest.pm
+lib/Eixo/Rest/Api.pm
+lib/Eixo/Rest/ApiFakeServer.pm
+lib/Eixo/Rest/BaseException.pm
+lib/Eixo/Rest/Client.pm
+lib/Eixo/Rest/Product.pm
+lib/Eixo/Rest/Request.pm
+lib/Eixo/Rest/RequestAsync.pm
+lib/Eixo/Rest/RequestAsyncThread.pm
+lib/Eixo/Rest/RequestSync.pm
+t/000_compile.t
+t/010_fake_api.t
+t/020_client.t
+t/030_request_async.t
+t/test_base.pm
+META.yml                                 Module YAML meta-data (added by MakeMaker)
+META.json                                Module JSON meta-data (added by MakeMaker)
