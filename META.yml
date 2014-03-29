@@ -23,4 +23,4 @@ requires:
   JSON: 2.50
   LWP::UserAgent: 5.0
   Net::HTTP: 6.06
-version: 1.003
+version: 1.004
