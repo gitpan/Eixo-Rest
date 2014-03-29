@@ -4,6 +4,7 @@ MANIFEST
 Makefile.PL
 README.md
 lib/Eixo/Rest.pm
+lib/Eixo/Rest.pod
 lib/Eixo/Rest/Api.pm
 lib/Eixo/Rest/ApiFakeServer.pm
 lib/Eixo/Rest/BaseException.pm
