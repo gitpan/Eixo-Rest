@@ -1,11 +1,11 @@
 {
-   "abstract" : "Perl module to interact with Docker API",
+   "abstract" : "Base modules to build REST api clients",
    "author" : [
       "Francisco Maseda <frmadem@gmail.com>",
       "Javier Gomez <alambike@gmail.com>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "ExtUtils::MakeMaker version 6.94, CPAN::Meta::Converter version 2.120351",
+   "generated_by" : "ExtUtils::MakeMaker version 6.94, CPAN::Meta::Converter version 2.140640",
    "license" : [
       "unknown"
    ],
@@ -34,6 +34,7 @@
       "runtime" : {
          "requires" : {
             "Eixo::Base" : "1.0",
+            "HTTP::Server::Simple::CGI" : "0",
             "JSON" : "2.50",
             "LWP::UserAgent" : "5.0",
             "Net::HTTP" : "6.06"
@@ -41,5 +42,5 @@
       }
    },
    "release_status" : "stable",
-   "version" : "1.005"
+   "version" : "1.006"
 }

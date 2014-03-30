@@ -2,9 +2,90 @@
 
 =head1 NAME
 
-Eixo::Rest Module
+Eixo::Rest - Base modules to build REST api clients
 
-=head1 SINOPSE
+=head1 SINOPSIS
+
+Build an api client:
+
+- Define the api products
+
+    package MyApiClient;
+
+    use strict;
+    use parent qw(Eixo::Rest::Api);
+
+    sub users {
+        $_[0]->produce('MyApi::User');
+    }
+
+    sub images {
+        $_[0]->produce('MyApi::Image');
+    }
+
+
+- Implement api products 
+
+    package MyApi::User;
+
+    use parent qw(Eixo::Rest::Product);
+
+    sub getUsers {
+
+        my ($self,%args) = @_;
+
+        my $list  = [];
+
+        my $args = {
+            all => $args{all} || undef,
+            limit => $args{limit} || 1000,
+        };
+
+        
+        $self->api->getUsers(
+
+            args => $args, 
+
+            get_params => [qw(all limit)],
+
+            __callback => sub {
+
+                foreach my $r (@{$_[0]}){
+
+                    push @$list, MyApi::User->new(%$r)
+                }
+
+                return $list;
+            }
+        );
+
+    }
+
+- Use it:
+
+    my $a = MyApiClient->new(http://api.acme.com);
+
+    my $user_list = $a->getUsers(
+        all => 1, 
+        limit => 10
+    );
+
+- Use it asynchronously:
+
+
+    my $a = MyApiClient->new(http://api.acme.com);
+
+    my $job = $a->getUsersAsync(
+        all => 1, 
+        limit => 10
+    );
+
+    # do other stuff
+    ...
+
+    # when you get the results
+    my $user_list = $a->wait_for_job($job);
+
 
 
 =head1 DESCRIPTION
@@ -18,11 +99,12 @@ In addition, it allows send HTTP requests in sync and async mode (using threads)
 It also offers a tool for building REST APIs for testing purpouses.
 
 
-=head1 AUTHORS
+
+=head1 AUTHOR
 
 Francisco Maseda, E<lt>frmadem@gmail.comE<gt>
 
-Javier Gomez, E<lt>alambike@gmail.comE<gt>
+Javier Gómez, E<lt>alambike@gmail.comE<gt>
 
 
 =head1 COPYRIGHT AND LICENSE

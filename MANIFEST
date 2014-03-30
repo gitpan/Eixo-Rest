@@ -3,6 +3,8 @@ LICENSE
 MANIFEST
 Makefile.PL
 README.md
+META.yml
+META.json
 lib/Eixo/Rest.pm
 lib/Eixo/Rest.pod
 lib/Eixo/Rest/Api.pm
@@ -19,5 +21,3 @@ t/010_fake_api.t
 t/020_client.t
 t/030_request_async.t
 t/test_base.pm
-META.yml                                 Module YAML meta-data (added by MakeMaker)
-META.json                                Module JSON meta-data (added by MakeMaker)

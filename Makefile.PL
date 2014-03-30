@@ -10,10 +10,11 @@ WriteMakefile(
         'LWP::UserAgent' => "5.0",
         'Net::HTTP'   => '6.06',
         'Eixo::Base' => '1.0',
+        'HTTP::Server::Simple::CGI' => '0',
     },
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (
-          ABSTRACT         => 'Perl module to interact with Docker API', 
+          ABSTRACT_FROM        => 'lib/Eixo/Rest.pod', 
           AUTHOR           => ['Francisco Maseda <frmadem@gmail.com>', 'Javier Gomez <alambike@gmail.com>'],
       ): ()),
 );
