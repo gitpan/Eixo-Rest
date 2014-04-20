@@ -83,7 +83,7 @@ Build an api client:
     # do other stuff
     ...
 
-    # when you get the results
+    # when you want the results
     my $user_list = $a->wait_for_job($job);
 
 

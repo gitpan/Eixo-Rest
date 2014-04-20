@@ -1,52 +1,59 @@
 use t::test_base;
+use Config;
 
 BEGIN{
 	use_ok("Eixo::Rest::RequestAsync");
 }
 
-#
-# We create a fake UserAgent and a fake Api
-# 
-my $TIMES = 5;
+SKIP: {
 
-my $api = FakeApi->new;
-my $ua = FakeUserAgent->new($TIMES, 'OK');
+	skip "This Perl not built to support threads", 2 if (! $Config{'useithreads'});
 
-my @chunks;
-my $end;
+	#
+	# We create a fake UserAgent and a fake Api
+	# 
+	my $TIMES = 5;
 
-my $request_async = Eixo::Rest::RequestAsync->new(
+	my $api = FakeApi->new;
+	my $ua = FakeUserAgent->new($TIMES, 'OK');
 
-	api=>$api,
+	my @chunks;
+	my $end;
 
-	onProgress=>sub {
-		push @chunks, $_[0];
-	},
+	my $request_async = Eixo::Rest::RequestAsync->new(
 
-	onSuccess=>sub{
-		$end = $_[0];
-	},
+		api=>$api,
 
-	callback=>sub{
-		@_;
-	},
+		onProgress=>sub {
+			push @chunks, $_[0];
+		},
 
-	__format=>'RAW'
+		onSuccess=>sub{
+			$end = $_[0];
+		},
 
-);
+		callback=>sub{
+			@_;
+		},
 
-$request_async->send($ua, undef);
+		__format=>'RAW'
 
-#
-# Waiting for the jobs to finish
-#
-$api->waitForJobs();
+	);
 
-is(scalar(@chunks), $TIMES, 'Progress of request seems ok');
+	$request_async->send($ua, undef);
 
-is(scalar(grep { 'CHUNK_' .$_ ~~ @chunks } (1..$TIMES)), $TIMES, 'Type of progress seems all right');
+	#
+	# Waiting for the jobs to finish
+	#
+	$api->waitForJobs();
 
-is($end, 'OK', 'The request ended well');
+	is(scalar(@chunks), $TIMES, 'Progress of request seems ok');
+
+	is(scalar(grep { 'CHUNK_' .$_ ~~ @chunks } (1..$TIMES)), $TIMES, 'Type of progress seems all right');
+
+	is($end, 'OK', 'The request ended well');
+
+}
 
 done_testing();
 
