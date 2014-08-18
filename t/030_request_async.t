@@ -1,13 +1,11 @@
 use t::test_base;
 use Config;
 
-BEGIN{
-	use_ok("Eixo::Rest::RequestAsync");
-}
 
 SKIP: {
 
 	skip "This Perl not built to support threads", 2 if (! $Config{'useithreads'});
+	use_ok("Eixo::Rest::RequestAsync");
 
 	#
 	# We create a fake UserAgent and a fake Api

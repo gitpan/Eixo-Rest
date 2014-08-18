@@ -8,7 +8,7 @@ use JSON -convert_blessed_universally;
 use Carp;
 use Data::Dumper;
 
-use Eixo::Rest::RequestAsync;
+use Config;
 use Eixo::Rest::RequestSync;
 
 
@@ -242,6 +242,10 @@ sub __send{
 
 sub __sendAsync{
 	my ($self, $req, %args) = @_;
+
+    	die("unsupported:  ERROR: This Perl not built to support threads\n") if (! $Config{'useithreads'});
+
+	eval 'use Eixo::Rest::RequestAsync';
 
 	Eixo::Rest::RequestAsync->new(
 

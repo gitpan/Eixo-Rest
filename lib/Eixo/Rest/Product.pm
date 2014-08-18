@@ -49,6 +49,12 @@ sub DESTROY{}
 sub populate{
 	my ($self, $values) = @_;
 
+	# debug
+	# use Data::Dumper;
+	# print "POPULANDO ".ref($self)."\n";
+	# print Dumper($values);
+	# print "\n\n";
+
 	$self->$_($values->{$_}) foreach(keys(%$values));
 
 	$self;
